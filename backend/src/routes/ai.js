@@ -1,79 +1,49 @@
-import express from 'express';
-import aiClient from '../config/aiClient.js';
-
-const router = express.Router();
-
-// تولید متن/ایده/پرامپت برای کسب‌درآمد، اتوماسیون، طراحی
-router.post('/generate', async (req, res) => {
-  try {
-    const { prompt, context } = req.body;
-
-    const response = await aiClient.responses.create({
-      model: 'gpt-4.1-mini',
-      input: [
-        {
-          role: 'system',
-          content:
-            'تو دستیار OceanAI هستی؛ تمرکزت روی اتوماسیون، طراحی سایت و اپ، فریلنسری و کسب درآمد است.',
-        },
-        {
-          role: 'user',
-          content: `پرامپت: ${prompt}\nکانتکست: ${context || 'بدون کانتکست اضافی'}`,
-        },
-      ],
-    });
-
-    res.json({ result: response.output_text || response });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'خطا در ارتباط با هوش مصنوعی OceanAI' });
-  }
-});
-
-// دستیار کدنویسی: تحلیل و اصلاح کد
-router.post('/code-assistant', async (req, res) => {
-  try {
-    const { code, goal } = req.body;
-
-    const response = await aiClient.responses.create({
-      model: 'gpt-4.1-mini',
-      input: [
-        {
-          role: 'system',
-          content:
-            'تو دستیار کدنویسی OceanAI هستی؛ کد را تحلیل می‌کنی، بهینه می‌کنی و پیشنهاد می‌دهی.',
-        },
-        {
-          role: 'user',
-          content: `کد:\n${code}\nهدف:\n${goal || 'بهینه‌سازی و خوانایی بهتر'}`,
-        },
-      ],
-    });
-
-    res.json({ result: response.output_text || response });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'خطا در دستیار کدنویسی OceanAI' });
-  }
-});
-export default router;
+/**
+ * OceanAI — AI Routes
+ * نسخهٔ پیشرفته، امن، یکپارچه و هماهنگ با معماری oceanAI2
+ */
 
 import express from "express";
-import { generateIdea, suggestPrompt } from "../controllers/aiController.js";
+import { validate } from "../middleware/validate.js";
+import {
+  generateIdea,
+  suggestPrompt,
+  analyzeCode
+} from "../controllers/aiController.js";
 
 const router = express.Router();
 
-router.post("/generate", generateIdea);
-router.post("/prompt-suggest", suggestPrompt);
+/* ------------------------------
+   تولید ایده / متن / پرامپت — Idea Machine
+------------------------------ */
+router.post(
+  "/generate",
+  validate([
+    { field: "prompt", required: true, min: 3 },
+    { field: "context", required: false }
+  ]),
+  generateIdea
+);
 
-export default router;
+/* ------------------------------
+   پیشنهاد پرامپت — Prompt Suggester
+------------------------------ */
+router.post(
+  "/suggest",
+  validate([{ field: "base", required: true, min: 3 }]),
+  suggestPrompt
+);
 
-import express from "express";
-import { generateIdea, suggestPrompt } from "../controllers/aiController.js";
-
-const router = express.Router();
-
-router.post("/generate", generateIdea);
-router.post("/prompt-suggest", suggestPrompt);
+/* ------------------------------
+   دستیار کدنویسی — Code Assistant
+------------------------------ */
+router.post(
+  "/code-assistant",
+  validate([
+    { field: "code", required: true, min: 5 },
+    { field: "goal", required: true, min: 3 }
+  ]),
+  analyzeCode
+);
 
 export default router;

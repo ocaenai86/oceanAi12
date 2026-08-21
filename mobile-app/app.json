@@ -1,42 +1,52 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+{
+  "expo": {
+    "name": "OceanAI Mobile",
+    "slug": "oceani-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "oceani",
+    "icon": "./assets/icon.png",
 
-import PublicHomeScreen from "./screens/PublicHomeScreen";
-import PersonalHomeScreen from "./screens/PersonalHomeScreen";
-import DashboardScreen from "./screens/DashboardScreen";
-import SettingsScreen from "./screens/SettingsScreen";
+    "userInterfaceStyle": "dark",
 
-const Tab = createBottomTabNavigator();
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#050814"
+    },
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          headerShown: false,
-          tabBarStyle: { backgroundColor: "#050814", borderTopColor: "#23262E" },
-          tabBarActiveTintColor: "#3ED9C7",
-          tabBarInactiveTintColor: "#8A8F9C",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
 
-          tabBarIcon: ({ color, size }) => {
-            let iconName = "ellipse";
+    "assetBundlePatterns": [
+      "**/*"
+    ],
 
-            if (route.name === "Public") iconName = "planet";
-            if (route.name === "Personal") iconName = "person-circle";
-            if (route.name === "Dashboard") iconName = "speedometer";
-            if (route.name === "Settings") iconName = "settings";
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.oceani.mobile",
+      "buildNumber": "1.0.0"
+    },
 
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-      >
-        <Tab.Screen name="Public" component={PublicHomeScreen} options={{ title: "OceanAI" }} />
-        <Tab.Screen name="Personal" component={PersonalHomeScreen} options={{ title: "Core شخصی" }} />
-        <Tab.Screen name="Dashboard" component={DashboardScreen} options={{ title: "داشبورد" }} />
-        <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: "تنظیمات" }} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#050814"
+      },
+      "package": "com.oceani.mobile",
+      "versionCode": 1
+    },
+
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+
+    "extra": {
+      "apiBase": "https://your-backend-domain.com/api",
+      "eas": {
+        "projectId": "oceani-mobile-app-001"
+      }
+    }
+  }
 }

@@ -7,3 +7,4 @@ router.get("/stats", getStats);
 router.post("/settings", saveSettings);
 
 export default router;
+

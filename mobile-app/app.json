@@ -4,9 +4,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import PublicHomeScreen from "./screens/PublicHomeScreen";
-import PublicIdeaScreen from "./screens/PublicIdeaScreen";
 import PersonalHomeScreen from "./screens/PersonalHomeScreen";
-import PersonalProjectsScreen from "./screens/PersonalProjectsScreen";
+import DashboardScreen from "./screens/DashboardScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,33 +23,17 @@ export default function App() {
             let iconName = "ellipse";
             if (route.name === "Public") iconName = "planet";
             if (route.name === "Personal") iconName = "person-circle";
+            if (route.name === "Dashboard") iconName = "speedometer";
+            if (route.name === "Settings") iconName = "settings";
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
       >
         <Tab.Screen name="Public" component={PublicHomeScreen} options={{ title: "OceanAI" }} />
         <Tab.Screen name="Personal" component={PersonalHomeScreen} options={{ title: "Core شخصی" }} />
+        <Tab.Screen name="Dashboard" component={DashboardScreen} options={{ title: "داشبورد" }} />
+        <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: "تنظیمات" }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
-import PublicHomeScreen from "./screens/PublicHomeScreen";
-import PublicIdeaScreen from "./screens/PublicIdeaScreen";
-import PersonalHomeScreen from "./screens/PersonalHomeScreen";
-import PersonalProjectsScreen from "./screens/PersonalProjectsScreen";
-
-const Tab = createBottomTabNavigator();
-
-tabBarStyle: { backgroundColor: "#050814", borderTopColor: "#23262E" },
-tabBarActiveTintColor: "#3ED9C7",   // رنگ فعال
-tabBarInactiveTintColor: "#8A8F9C", // رنگ غیرفعال
-
-if (route.name === "Public") iconName = "planet";
-if (route.name === "Personal") iconName = "person-circle";
-
-<Tab.Screen name="Public" component={PublicHomeScreen} />
-<Tab.Screen name="Personal" component={PersonalHomeScreen} />

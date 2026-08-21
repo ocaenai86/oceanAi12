@@ -1,1 +1,108 @@
+/* رنگ‌های اصلی برند OceanAI */
+:root {
+  --bg-dark: #050814;
+  --bg-card: #0F111F;
+  --neon-green: #3ED9C7;
+  --neon-orange: #F5A623;
+  --text-main: #F4F1EA;
+  --text-muted: #8A8F9C;
+  --border-soft: #23262E;
+}
 
+/* صفحه اصلی */
+.oceanai-page {
+  background: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  padding-bottom: 4rem;
+}
+
+/* هدر */
+.hero {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.6rem;
+  color: var(--neon-green);
+  letter-spacing: 0.08em;
+}
+
+.hero-subtitle {
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  color: var(--text-muted);
+}
+
+.btn-primary {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  background: var(--neon-orange);
+  color: var(--bg-dark);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* بخش‌ها */
+.section-title {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--neon-green);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* کارت‌ها */
+.grid {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 1rem;
+  border: 1px solid var(--border-soft);
+  text-align: center;
+}
+
+/* کارت‌های نئونی */
+.neon-card {
+  border: 1px solid rgba(62, 217, 199, 0.4);
+  box-shadow: 0 0 12px rgba(62, 217, 199, 0.15);
+}
+
+/* بخش ماشین تولید ایده */
+.idea-machine-section {
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.idea-machine-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* کارت‌های پکیج */
+.pricing-card {
+  border: 1px solid rgba(245, 166, 35, 0.4);
+  box-shadow: 0 0 12px rgba(245, 166, 35, 0.15);
+}
+
+/* فوتر */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

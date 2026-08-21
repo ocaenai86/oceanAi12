@@ -1,1 +1,156 @@
 
+import React, { useState } from 'react';
+
+export default function OceanAIIdeaMachine() {
+  const [prompt, setPrompt] = useState('');
+  const [context, setContext] = useState('');
+  const [result, setResult] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleGenerate = async () => {
+    setLoading(true);
+    setError('');
+    setResult('');
+
+    try {
+      const res = await fetch('https://your-backend-domain.com/api/ai/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt, context }),
+      });
+
+      const data = await res.json();
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setResult(data.result);
+      }
+    } catch (e) {
+      setError('خطا در اتصال به OceanAI. بعداً دوباره تلاش کن.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div
+      className="flex flex-col gap-3 p-3 rounded-xl"
+      style={{ background: '#0F111F', border: '1px solid #23262E', color: '#F4F1EA' }}
+    >
+      <div>
+        <h2
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: '14px',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#3ED9C7',
+          }}
+        >
+          OceanAI Idea Machine
+        </h2>
+        <p style={{ fontSize: '11px', color: '#8A8F9C' }}>
+          تولید ایده برای اتوماسیون، فریلنسری، طراحی سایت و اپ، و مدل‌های کسب‌درآمد.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label style={{ fontSize: '11px', color: '#8A8F9C' }}>پرامپت اصلی</label>
+        <textarea
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          rows={3}
+          style={{
+            background: '#050814',
+            borderRadius: '10px',
+            border: '1px solid #23262E',
+            color: '#F4F1EA',
+            fontSize: '12px',
+            padding: '8px',
+            resize: 'none',
+          }}
+          placeholder="مثلاً: ایده برای اتوماسیون یک فروشگاه آنلاین با ربات‌های هوش مصنوعی..."
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label style={{ fontSize: '11px', color: '#8A8F9C' }}>کانتکست (اختیاری)</label>
+        <textarea
+          value={context}
+          onChange={(e) => setContext(e.target.value)}
+          rows={2}
+          style={{
+            background: '#050814',
+            borderRadius: '10px',
+            border: '1px solid #23262E',
+            color: '#F4F1EA',
+            fontSize: '12px',
+            padding: '8px',
+            resize: 'none',
+          }}
+          placeholder="مثلاً: من فریلنسر طراحی سایت هستم و می‌خوام سرویس اتوماسیون بفروشم..."
+        />
+      </div>
+
+      <button
+        onClick={handleGenerate}
+        disabled={loading || !prompt.trim()}
+        style={{
+          marginTop: '4px',
+          padding: '8px 12px',
+          borderRadius: '999px',
+          border: 'none',
+          background: loading ? '#565B66' : '#F5A623',
+          color: '#050814',
+          fontSize: '12px',
+          fontWeight: 600,
+          cursor: loading ? 'default' : 'pointer',
+        }}
+      >
+        {loading ? 'در حال تولید با OceanAI…' : 'تولید ایدهٔ پول‌ساز'}
+      </button>
+
+      {error && (
+        <div
+          style={{
+            marginTop: '6px',
+            fontSize: '11px',
+            color: '#FCA5A5',
+          }}
+        >
+          {error}
+        </div>
+      )}
+
+      {result && (
+        <div
+          style={{
+            marginTop: '8px',
+            padding: '10px',
+            borderRadius: '10px',
+            background: '#050814',
+            border: '1px solid #3ED9C755',
+            fontSize: '12px',
+            lineHeight: 1.6,
+            textAlign: 'right',
+          }}
+        >
+          {result}
+        </div>
+      )}
+
+      <div
+        style={{
+          marginTop: '4px',
+          fontSize: '10px',
+          color: '#8A8F9C',
+          textAlign: 'left',
+          direction: 'ltr',
+        }}
+      >
+        OceanAI • AI & Automation Studio • contact: ocaenai.86@gmail.com
+      </div>
+    </div>
+  );
+}

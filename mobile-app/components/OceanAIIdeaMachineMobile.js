@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  StyleSheet,
+} from "react-native";
+
+const API_BASE = "https://your-backend-domain.com/api";
 
 export default function OceanAIIdeaMachineMobile({ mode = "public" }) {
   const [prompt, setPrompt] = useState("");
@@ -8,7 +17,7 @@ export default function OceanAIIdeaMachineMobile({ mode = "public" }) {
   const [loading, setLoading] = useState(false);
 
   const callApi = async (path, body) => {
-    const res = await fetch(`https://your-backend-domain.com/api/ai/${path}`, {
+    const res = await fetch(`${API_BASE}/ai/${path}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -20,6 +29,7 @@ export default function OceanAIIdeaMachineMobile({ mode = "public" }) {
     if (!prompt.trim()) return;
     setLoading(true);
     setResult("");
+
     try {
       const data = await callApi("generate", { prompt, context, mode });
       setResult(data.result || "پاسخی دریافت نشد.");
@@ -33,8 +43,11 @@ export default function OceanAIIdeaMachineMobile({ mode = "public" }) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>
-        {mode === "public" ? "پرامپت برای ایدهٔ کسب‌درآمد" : "پرامپت شخصی برای خودت"}
+        {mode === "public"
+          ? "پرامپت برای ایدهٔ کسب‌درآمد"
+          : "پرامپت شخصی برای خودت"}
       </Text>
+
       <TextInput
         value={prompt}
         onChangeText={setPrompt}
@@ -45,6 +58,7 @@ export default function OceanAIIdeaMachineMobile({ mode = "public" }) {
       />
 
       <Text style={styles.label}>کانتکست (اختیاری)</Text>
+
       <TextInput
         value={context}
         onChangeText={setContext}
@@ -54,7 +68,11 @@ export default function OceanAIIdeaMachineMobile({ mode = "public" }) {
         placeholderTextColor="#6B7280"
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleGenerate} disabled={loading}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleGenerate}
+        disabled={loading}
+      >
         {loading ? (
           <ActivityIndicator color="#050814" />
         ) : (
@@ -99,39 +117,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "#F4F1EA",
     fontSize: 12,
-    lineHeight: 18,import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-
-export default function OceanAIStatsCard({ label, value, color }) {
-  return (
-    <View style={[styles.card, { borderColor: color }]}>
-      <Text style={[styles.label, { color }]}>{label}</Text>
-      <Text style={styles.value}>{value}</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "#0F111F",
-    borderRadius: 12,
-    padding: 12,
-    borderWidth: 1,
-  },
-  label: { fontSize: 13, marginBottom: 4 },
-  value: { color: "#F4F1EA", fontSize: 16, fontWeight: "600" },
-});
+    lineHeight: 18,
   },
 });
-
-
-const API_BASE = "https://your-backend-domain.com/api";
-
-const callApi = async (path, body) => {
-  const res = await fetch(`${API_BASE}/ai/${path}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  return res.json();
-};

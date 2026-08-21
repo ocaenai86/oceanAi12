@@ -1,64 +1,88 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import PublicIdeaScreen from "./PublicIdeaScreen";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 
-export default function PublicHomeScreen() {
+import OceanAIIdeaMachineSmart from "../components/OceanAIIdeaMachineSmart";
+
+export default function IdeaMachineScreen() {
+  const [mode, setMode] = useState("public");
+
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.hero}>
-        <Text style={styles.title}>OceanAI</Text>
-        <Text style={styles.subtitle}>
-          اقیانوس هوش مصنوعی، اتوماسیون، طراحی سایت و اپلیکیشن برای کسب درآمد و فریلنسری.
-        </Text>
-      </View>
+      {/* عنوان صفحه */}
+      <Text style={styles.title}>OceanAI Idea Machine</Text>
+      <Text style={styles.subtitle}>
+        ماشین تولید ایده برای اتوماسیون، فریلنسری و کسب درآمد.
+      </Text>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>چرا OceanAI؟</Text>
-        <View style={styles.cardGrid}>
-          <Text style={styles.card}>ربات‌ها و اتوماسیون کسب‌وکار</Text>
-          <Text style={styles.card}>طراحی سایت و پنل مدیریت</Text>
-          <Text style={styles.card}>اپلیکیشن موبایل با هوش مصنوعی</Text>
-          <Text style={styles.card}>پکیج‌های فریلنسری و آموزش</Text>
+      {/* توضیح حالت‌ها */}
+      <View style={styles.modeBox}>
+        <Text style={styles.modeTitle}>حالت تولید ایده:</Text>
+
+        <View style={styles.modeRow}>
+          <Text
+            style={[
+              styles.modeOption,
+              mode === "public" && styles.modeActive,
+            ]}
+            onPress={() => setMode("public")}
+          >
+            عمومی
+          </Text>
+
+          <Text
+            style={[
+              styles.modeOption,
+              mode === "personal" && styles.modeActive,
+            ]}
+            onPress={() => setMode("personal")}
+          >
+            شخصی
+          </Text>
         </View>
       </View>
 
+      {/* کامپوننت اصلی تولید ایده */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>ماشین تولید ایدهٔ OceanAI</Text>
-        <PublicIdeaScreen embedded />
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>پکیج‌های کسب درآمد</Text>
-        <View style={styles.cardGrid}>
-          <Text style={styles.card}>پکیج شروع فریلنسری</Text>
-          <Text style={styles.card}>پکیج اتوماسیون کسب‌وکار</Text>
-          <Text style={styles.card}>پکیج استودیو هوش مصنوعی</Text>
-        </View>
-      </View>
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>برای سفارش و همکاری: ocaenai.86@gmail.com</Text>
+        <OceanAIIdeaMachineSmart mode={mode} />
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#050814" },
-  hero: { padding: 24, alignItems: "center" },
-  title: { fontSize: 28, color: "#3ED9C7", fontWeight: "700" },
-  subtitle: { marginTop: 8, color: "#8A8F9C", textAlign: "center" },
-  section: { paddingHorizontal: 16, paddingVertical: 12 },
-  sectionTitle: { color: "#3ED9C7", fontSize: 16, marginBottom: 8 },
-  cardGrid: { gap: 8 },
-  card: {
+  container: { flex: 1, backgroundColor: "#050814", padding: 16 },
+  title: { fontSize: 24, color: "#3ED9C7", fontWeight: "700" },
+  subtitle: { color: "#8A8F9C", marginBottom: 20, fontSize: 13 },
+
+  modeBox: {
     backgroundColor: "#0F111F",
+    padding: 12,
     borderRadius: 12,
-    padding: 10,
     borderWidth: 1,
     borderColor: "#23262E",
-    color: "#F4F1EA",
+    marginBottom: 20,
   },
-  footer: { padding: 16, alignItems: "center" },
-  footerText: { color: "#8A8F9C", fontSize: 12 },
+  modeTitle: { color: "#F5A623", fontSize: 14, marginBottom: 10 },
+  modeRow: { flexDirection: "row", gap: 12 },
+  modeOption: {
+    color: "#8A8F9C",
+    fontSize: 14,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    backgroundColor: "#23262E",
+  },
+  modeActive: {
+    backgroundColor: "#3ED9C7",
+    color: "#050814",
+    fontWeight: "700",
+  },
+
+  section: { marginTop: 10 },
 });

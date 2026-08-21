@@ -1,1 +1,233 @@
+/* =========================================
+   OceanAI Design System + Studio Styles
+   ========================================= */
 
+/* رنگ‌ها و متغیرهای اصلی برند OceanAI */
+:root {
+  --bg-dark: #050814;
+  --bg-panel: #0F111F;
+  --bg-editor: #050814;
+
+  --bg-light-main: #F4F1EA;
+  --bg-light-panel: #FFFFFF;
+  --bg-light-editor: #FAFAFA;
+
+  --neon-green: #3ED9C7;
+  --neon-orange: #F5A623;
+  --neon-purple: #A78BFA;
+
+  --neon-green-light: #0FB8A0;
+  --neon-orange-light: #D9822B;
+  --neon-purple-light: #7C5CF5;
+
+  --text-main: #F4F1EA;
+  --text-muted: #8A8F9C;
+  --text-main-light: #050814;
+  --text-muted-light: #4B5563;
+
+  --border-soft: #23262E;
+  --border-soft-light: #D1D5DB;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+/* =========================================
+   OceanAI Studio – حالت کلی
+   ========================================= */
+
+.oceanai-studio {
+  background: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+}
+
+/* کارت‌های عمومی استودیو */
+.studio-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+/* دکمه‌های عمومی استودیو */
+.studio-btn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+/* واریانت‌های رنگی دکمه‌ها */
+.studio-btn-green {
+  background: var(--neon-green);
+  color: var(--bg-dark);
+}
+
+.studio-btn-orange {
+  background: var(--neon-orange);
+  color: var(--bg-dark);
+}
+
+.studio-btn-purple {
+  background: var(--neon-purple);
+  color: #fff;
+}
+
+/* =========================================
+   OceanAI Studio – Dark Mode
+   ========================================= */
+
+.oceanai-studio-dark {
+  background: var(--bg-dark);
+  color: var(--text-main);
+}
+
+.oceanai-studio-dark .studio-card {
+  background: var(--bg-panel);
+  border-color: var(--border-soft);
+}
+
+.oceanai-studio-dark .studio-btn {
+  background: var(--neon-orange);
+  color: var(--bg-dark);
+}
+
+/* =========================================
+   OceanAI Studio – Light Mode
+   ========================================= */
+
+.oceanai-studio-light {
+  background: var(--bg-light-main);
+  color: var(--text-main-light);
+}
+
+.oceanai-studio-light .studio-card {
+  background: var(--bg-light-panel);
+  border-color: var(--border-soft-light);
+}
+
+.oceanai-studio-light .studio-btn {
+  background: var(--neon-green-light);
+  color: #fff;
+}
+
+/* =========================================
+   OceanAI UI Kit – دکمه‌ها، کارت‌ها، ورودی‌ها
+   ========================================= */
+
+/* دکمه‌ها */
+.btn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-green {
+  background: var(--neon-green);
+  color: var(--bg-dark);
+}
+
+.btn-orange {
+  background: var(--neon-orange);
+  color: var(--bg-dark);
+}
+
+.btn-purple {
+  background: var(--neon-purple);
+  color: #fff;
+}
+
+/* کارت‌ها */
+.card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+/* گرادیان‌ها */
+.gradient-green {
+  background: linear-gradient(145deg, #0F111F, #0FB8A0);
+}
+
+.gradient-orange {
+  background: linear-gradient(145deg, #0F111F, #F5A623);
+}
+
+.gradient-purple {
+  background: linear-gradient(145deg, #0F111F, #A78BFA);
+}
+
+/* ورودی‌ها */
+.input {
+  background: var(--bg-editor);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+/* =========================================
+   OceanAI Design System – فاصله، گردی، سایه، تایپوگرافی
+   ========================================= */
+
+/* فاصله‌ها */
+.spacing-xs { margin: 4px; }
+.spacing-sm { margin: 8px; }
+.spacing-md { margin: 16px; }
+.spacing-lg { margin: 24px; }
+.spacing-xl { margin: 40px; }
+
+/* گردی‌ها */
+.radius-sm { border-radius: var(--radius-sm); }
+.radius-md { border-radius: var(--radius-md); }
+.radius-lg { border-radius: var(--radius-lg); }
+
+/* سایه‌ها */
+.shadow-soft {
+  box-shadow: 0 0 12px rgba(62, 217, 199, 0.15);
+}
+
+.shadow-strong {
+  box-shadow: 0 0 20px rgba(245, 166, 35, 0.25);
+}
+
+/* تایپوگرافی */
+.font-title {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* =========================================
+   OceanAI Neon Animations – افکت‌های نئونی
+   ========================================= */
+
+@keyframes neonPulseGreen {
+  0% { box-shadow: 0 0 6px rgba(62, 217, 199, 0.3); }
+  50% { box-shadow: 0 0 14px rgba(62, 217, 199, 0.6); }
+  100% { box-shadow: 0 0 6px rgba(62, 217, 199, 0.3); }
+}
+
+@keyframes neonPulseOrange {
+  0% { box-shadow: 0 0 6px rgba(245, 166, 35, 0.3); }
+  50% { box-shadow: 0 0 14px rgba(245, 166, 35, 0.6); }
+  100% { box-shadow: 0 0 6px rgba(245, 166, 35, 0.3); }
+}
+
+.neon-green-animated {
+  animation: neonPulseGreen 2s infinite;
+}
+
+.neon-orange-animated {
+  animation: neonPulseOrange 2s infinite;
+}

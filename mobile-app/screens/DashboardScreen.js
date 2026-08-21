@@ -6,6 +6,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
+
 import OceanAIStatsCard from "../components/OceanAIStatsCard";
 import OceanAIIdeaMachineMobile from "../components/OceanAIIdeaMachineMobile";
 
@@ -14,19 +15,29 @@ const API_BASE = "https://your-backend-domain.com/api";
 export default function DashboardScreen() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  /* ------------------------------
+     دریافت آمار داشبورد از API OceanAI
+  ------------------------------ */
+  const fetchStats = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/oceanai/stats`);
+      const data = await res.json();
+
+      if (data?.success === false) {
+        setError(data.error || "خطا در دریافت آمار");
+      } else {
+        setStats(data);
+      }
+    } catch (err) {
+      setError("خطا در اتصال به OceanAI");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const res = await fetch(`${API_BASE}/oceanai/stats`);
-        const data = await res.json();
-        setStats(data);
-      } catch {
-        setStats(null);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchStats();
   }, []);
 
@@ -37,8 +48,11 @@ export default function DashboardScreen() {
         نمای کلی از پروژه‌ها، درآمد و ایده‌های تولیدشده.
       </Text>
 
+      {/* آمار داشبورد */}
       {loading ? (
         <ActivityIndicator color="#3ED9C7" />
+      ) : error ? (
+        <Text style={styles.error}>{error}</Text>
       ) : (
         <View style={styles.grid}>
           <OceanAIStatsCard
@@ -59,6 +73,7 @@ export default function DashboardScreen() {
         </View>
       )}
 
+      {/* ماشین ایده OceanAI */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>ماشین ایدهٔ شخصی</Text>
         <OceanAIIdeaMachineMobile mode="personal" />
@@ -71,6 +86,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#050814", padding: 16 },
   title: { fontSize: 22, color: "#3ED9C7", fontWeight: "700" },
   subtitle: { color: "#8A8F9C", marginBottom: 16 },
+  error: { color: "#FF6B6B", marginBottom: 12 },
   grid: { gap: 12, marginBottom: 20 },
   section: { marginTop: 10 },
   sectionTitle: { color: "#F5A623", fontSize: 15, marginBottom: 8 },

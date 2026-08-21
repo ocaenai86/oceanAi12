@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 
-export default function OceanAIIdeaMachine() {
+export default function OceanAIStudio.jsx() {
   const [prompt, setPrompt] = useState('');
   const [context, setContext] = useState('');
   const [result, setResult] = useState('');

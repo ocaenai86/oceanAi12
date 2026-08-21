@@ -3,45 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <title>OceanAI - استودیو هوش مصنوعی و اتوماسیون</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- استایل اصلی پروژه فرانت‌اند -->
   <link rel="stylesheet" href="/styles/main.css" />
+
+  <!-- اگر از باندلر مثل Vite/CRA استفاده می‌کنی، این‌ها توسط خودش اضافه می‌شوند -->
 </head>
-<body>
+<body class="ocean-body">
+  <!-- لندینگ استاتیک OceanAI -->
   <header class="hero">
-    <h1>OceanAI</h1>
-    <p>اقیانوس هوش مصنوعی، اتوماسیون، طراحی سایت و اپلیکیشن برای کسب درآمد و فریلنسری.</p>
-    <a href="#pricing" class="btn-primary">مشاهده پکیج‌ها</a>
+    <div class="hero-inner">
+      <div class="hero-brand">
+        <span class="hero-logo">🌊</span>
+        <h1 class="hero-title">OceanAI</h1>
+      </div>
+      <p class="hero-subtitle">
+        اقیانوس هوش مصنوعی، اتوماسیون، طراحی سایت و اپلیکیشن برای کسب درآمد و فریلنسری.
+      </p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">مشاهده پکیج‌ها</a>
+        <a href="#contact" class="btn btn-secondary">درخواست مشاوره</a>
+      </div>
+    </div>
   </header>
 
-  <section class="features">
-    <h2>چرا OceanAI؟</h2>
-    <div class="grid">
-      <div class="card">ربات‌ها و اتوماسیون کسب‌وکار</div>
-      <div class="card">طراحی سایت و پنل مدیریت</div>
-      <div class="card">اپلیکیشن موبایل با هوش مصنوعی</div>
-      <div class="card">پکیج‌های فریلنسری و آموزش</div>
-    </div>
-  </section>
+  <main>
+    <section class="section features">
+      <div class="section-header">
+        <h2 class="section-title">چرا OceanAI؟</h2>
+        <p class="section-subtitle">
+          ترکیب اتوماسیون، طراحی و هوش مصنوعی برای ساخت سیستم‌های درآمدزا.
+        </p>
+      </div>
 
-  <section id="pricing" class="pricing">
-    <h2>پکیج‌های کسب درآمد</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>پکیج شروع فریلنسری</h3>
-        <p>وب‌سایت شخصی + اتوماسیون ساده + راهنمای جذب مشتری.</p>
-      </div>
-      <div class="card">
-        <h3>پکیج اتوماسیون کسب‌وکار</h3>
-        <p>پنل مدیریت + ربات‌ها + گزارش‌گیری هوشمند.</p>
-      </div>
-      <div class="card">
-        <h3>پکیج استودیو هوش مصنوعی</h3>
-        <p>سیستم تولید محتوا + API هوش مصنوعی + داشبورد.</p>
-      </div>
-    </div>
-  </section>
+      <div class="grid grid-4">
+        <article class="card feature-card">
+          <h3>ربات‌ها و اتوماسیون کسب‌وکار</h3>
+          <p>سیستم‌های خودکار برای مدیریت مشتری، پیام‌ها، گزارش‌ها و پیگیری‌ها.</p>
+        </article>
 
-  <footer class="footer">
-    <p>برای سفارش و همکاری: <strong>ocaenai.86@gmail.com</strong></p>
+        <article class="card feature-card">
+          <h3>طراحی سایت و پنل مدیریت</h3>
+          <p>وب‌سایت حرفه‌ای با پنل مدیریت برای کنترل محتوا و سفارش‌ها.</p>
+        </article>
+
+        <article class="card feature-card">
+          <h3>اپلیکیشن موبایل با هوش مصنوعی</h3>
+          <p>اپلیکیشن اختصاصی برای تعامل با مشتری و استفاده از مدل‌های هوش مصنوعی.</p>
+        </article>
+
+        <article class="card feature-card">
+          <h3>پکیج‌های فریلنسری و آموزش</h3>
+          <p>آموزش، ابزارها و سیستم‌های آماده برای شروع و رشد فریلنسری.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="pricing" class="section pricing">
+      <div class="section-header">
+        <h2 class="section-title">پکیج‌های کسب درآمد</h2>
+        <p class="section-subtitle">بر اساس سطح و هدف، یکی از پکیج‌ها را انتخاب کن.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card pricing-card">
+          <h3>پکیج شروع فریلنسری</h3>
+          <p>وب‌سایت شخصی + اتوماسیون ساده + راهنمای جذب مشتری.</p>
+          <ul class="pricing-list">
+            <li>صفحه معرفی شخصی</li>
+            <li>فرم تماس و سفارش</li>
+            <li>راهنمای قدم‌به‌قدم شروع کار</li>
+          </ul>
+        </article>
+
+        <article class="card pricing-card">
+          <h3>پکیج اتوماسیون کسب‌وکار</h3>
+          <p>پنل مدیریت + ربات‌ها + گزارش‌گیری هوشمند.</p>
+          <ul class="pricing-list">
+            <li>داشبورد مدیریت مشتری</li>
+            <li>اتوماسیون پیام‌ها و پیگیری‌ها</li>
+            <li>گزارش‌های تحلیلی ساده</li>
+          </ul>
+        </article>
+
+        <article class="card pricing-card">
+          <h3>پکیج استودیو هوش مصنوعی</h3>
+          <p>سیستم تولید محتوا + API هوش مصنوعی + داشبورد.</p>
+          <ul class="pricing-list">
+            <li>اتصال به مدل‌های هوش مصنوعی</li>
+            <li>داشبورد تولید و مدیریت محتوا</li>
+            <li>امکان توسعه و سفارشی‌سازی</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="footer">
+    <div class="footer-inner">
+      <p>برای سفارش و همکاری:</p>
+      <p class="footer-email"><strong>ocaenai.86@gmail.com</strong></p>
+      <p class="footer-note">
+        می‌توانی ایده‌ات را بفرستی تا برایت یک سیستم کامل OceanAI طراحی شود.
+      </p>
+    </div>
   </footer>
+
+  <!-- این div برای اپ React است؛ اگر بعداً داشبورد یا IDE اضافه کنی، اینجا mount می‌شود -->
+  <div id="root"></div>
 </body>
 </html>

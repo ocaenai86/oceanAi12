@@ -1,1 +1,35 @@
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 
+import PublicHomeScreen from "./screens/PublicHomeScreen";
+import PublicIdeaScreen from "./screens/PublicIdeaScreen";
+import PersonalHomeScreen from "./screens/PersonalHomeScreen";
+import PersonalProjectsScreen from "./screens/PersonalProjectsScreen";
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarStyle: { backgroundColor: "#050814", borderTopColor: "#23262E" },
+          tabBarActiveTintColor: "#3ED9C7",
+          tabBarInactiveTintColor: "#8A8F9C",
+          tabBarIcon: ({ color, size }) => {
+            let iconName = "ellipse";
+            if (route.name === "Public") iconName = "planet";
+            if (route.name === "Personal") iconName = "person-circle";
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+      >
+        <Tab.Screen name="Public" component={PublicHomeScreen} options={{ title: "OceanAI" }} />
+        <Tab.Screen name="Personal" component={PersonalHomeScreen} options={{ title: "Core شخصی" }} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}

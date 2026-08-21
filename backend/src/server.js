@@ -20,3 +20,15 @@ app.use('/api/projects', projectsRoutes);
 app.use('/api/orders', ordersRoutes);
 
 app.listen(4000, () => console.log('OceanAI backend on port 4000'));
+
+import express from 'express';
+import cors from 'cors';
+import aiRoutes from './routes/ai.js';
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.use('/api/ai', aiRoutes);
+
+app.listen(4000, () => console.log('OceanAI backend running on port 4000'));

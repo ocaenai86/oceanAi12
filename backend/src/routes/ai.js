@@ -56,5 +56,14 @@ router.post('/code-assistant', async (req, res) => {
     res.status(500).json({ error: 'خطا در دستیار کدنویسی OceanAI' });
   }
 });
+export default router;
+
+import express from "express";
+import { generateIdea, suggestPrompt } from "../controllers/aiController.js";
+
+const router = express.Router();
+
+router.post("/generate", generateIdea);
+router.post("/prompt-suggest", suggestPrompt);
 
 export default router;

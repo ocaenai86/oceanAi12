@@ -1,1 +1,37 @@
+{
+  "name": "oceanai-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OceanAI — AI Studio, Automation Builder, Idea Machine, Dashboard",
 
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js,.jsx"
+  },
+
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.0",
+
+    "lucide-react": "^0.378.0",
+    "axios": "^1.7.2",
+    "zustand": "^4.5.2",
+    "uuid": "^9.0.1",
+
+    "framer-motion": "^11.0.0",
+    "react-markdown": "^9.0.1",
+    "highlight.js": "^11.9.0"
+  },
+
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.2",
+    "vite": "^5.2.0",
+
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  }
+}

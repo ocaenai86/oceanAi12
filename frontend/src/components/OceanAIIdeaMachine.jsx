@@ -10,17 +10,19 @@ export default function OceanAIIdeaMachine() {
 
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
+
     setLoading(true);
     setResult('');
 
     try {
-      const res = await fetch('https://your-backend-domain.com/api/ai/generate', {
+      const res = await fetch('/api/ai/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, context }),
       });
 
       const data = await res.json();
+
       if (data.result) {
         setResult(data.result);
         setHistory((prev) => [{ prompt, result: data.result }, ...prev]);
@@ -72,7 +74,7 @@ export default function OceanAIIdeaMachine() {
         <Sparkles size={18} color="#F5A623" />
       </div>
 
-      {/* Prompt Input */}
+      {/* Prompt */}
       <div className="flex flex-col gap-2">
         <label style={{ fontSize: '11px', color: '#8A8F9C' }}>پرامپت اصلی</label>
         <textarea
@@ -92,7 +94,7 @@ export default function OceanAIIdeaMachine() {
         />
       </div>
 
-      {/* Context Input */}
+      {/* Context */}
       <div className="flex flex-col gap-2">
         <label style={{ fontSize: '11px', color: '#8A8F9C' }}>کانتکست (اختیاری)</label>
         <textarea
@@ -112,7 +114,7 @@ export default function OceanAIIdeaMachine() {
         />
       </div>
 
-      {/* Generate Button */}
+      {/* Button */}
       <button
         onClick={handleGenerate}
         disabled={loading}
@@ -170,7 +172,10 @@ export default function OceanAIIdeaMachine() {
             paddingTop: '8px',
           }}
         >
-          <h3 style={{ fontSize: '11px', color: '#8A8F9C', marginBottom: '6px' }}>ایده‌های اخیر</h3>
+          <h3 style={{ fontSize: '11px', color: '#8A8F9C', marginBottom: '6px' }}>
+            ایده‌های اخیر
+          </h3>
+
           <div className="flex flex-col gap-2">
             {history.slice(0, 3).map((item, i) => (
               <div

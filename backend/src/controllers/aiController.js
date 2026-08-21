@@ -15,3 +15,10 @@ export const generateIdea = async (req, res) => {
     res.status(500).json({ error: 'خطا در ارتباط با OceanAI' });
   }
 };
+import OpenAI from "openai";
+
+const aiClient = new OpenAI({
+  apiKey: process.env.OCEANAI_API_KEY,
+});
+
+export default aiClient;

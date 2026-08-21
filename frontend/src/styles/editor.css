@@ -1,1 +1,52 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #050814;
+  color: #f4f1ea;
+}
 
+.hero {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.2rem;
+  color: #3ed9c7;
+  letter-spacing: 0.08em;
+}
+
+.btn-primary {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  background: #f5a623;
+  color: #050814;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.features, .pricing {
+  padding: 2rem 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  background: #0f111f;
+  border-radius: 14px;
+  padding: 1rem;
+  border: 1px solid #23262e;
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: #8a8f9c;
+}

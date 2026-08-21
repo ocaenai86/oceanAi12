@@ -123,3 +123,15 @@ const styles = StyleSheet.create({
 });
   },
 });
+
+
+const API_BASE = "https://your-backend-domain.com/api";
+
+const callApi = async (path, body) => {
+  const res = await fetch(`${API_BASE}/ai/${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  return res.json();
+};

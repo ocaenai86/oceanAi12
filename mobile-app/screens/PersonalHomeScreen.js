@@ -1,10 +1,36 @@
-import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import OceanAIIdeaMachineMobile from "../components/OceanAIIdeaMachineMobile";
 
+const API_BASE = "https://your-backend-domain.com/api";
+
 export default function PersonalHomeScreen() {
+  const [personalStats, setPersonalStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  /* ------------------------------
+     دریافت اطلاعات شخصی از API OceanAI
+     (پروژه‌ها، درآمد، اتوماسیون‌ها، ربات‌ها)
+  ------------------------------ */
+  const fetchPersonalStats = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/oceanai/stats`);
+      const data = await res.json();
+      setPersonalStats(data);
+    } catch (err) {
+      setPersonalStats(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPersonalStats();
+  }, []);
+
   return (
     <ScrollView style={styles.container}>
+      {/* هدر صفحه */}
       <View style={styles.hero}>
         <Text style={styles.title}>OceanAI – Core شخصی</Text>
         <Text style={styles.subtitle}>
@@ -12,21 +38,41 @@ export default function PersonalHomeScreen() {
         </Text>
       </View>
 
+      {/* ماشین ایده شخصی */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>ماشین ایدهٔ شخصی OceanAI</Text>
         <OceanAIIdeaMachineMobile mode="personal" />
       </View>
 
+      {/* بخش پروژه‌ها و اتوماسیون‌ها */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>پروژه‌ها و اتوماسیون‌های من</Text>
 
-        <Text style={styles.card}>
-          این بخش بعداً به API وصل می‌شود و پروژه‌ها، ربات‌ها، اتوماسیون‌ها و سرویس‌های اختصاصی تو را نمایش می‌دهد.
-        </Text>
+        {loading ? (
+          <ActivityIndicator color="#3ED9C7" />
+        ) : !personalStats ? (
+          <Text style={styles.card}>خطا در اتصال به OceanAI</Text>
+        ) : (
+          <>
+            <Text style={styles.card}>
+              تعداد پروژه‌ها: {personalStats.projects}
+            </Text>
 
-        <Text style={styles.card}>
-          می‌توانیم اینجا داشبورد کوچک، وضعیت ربات‌ها، تعداد مشتری‌ها، درآمد ماهانه و… را هم اضافه کنیم.
-        </Text>
+            <Text style={styles.card}>
+              درآمد ماه جاری: {personalStats.income.toLocaleString()} تومان
+            </Text>
+
+            <Text style={styles.card}>
+              تعداد ایده‌های تولیدشده: {personalStats.ideas}
+            </Text>
+
+            {personalStats.ai_summary && (
+              <Text style={styles.card}>
+                خلاصهٔ هوش مصنوعی: {personalStats.ai_summary}
+              </Text>
+            )}
+          </>
+        )}
       </View>
     </ScrollView>
   );

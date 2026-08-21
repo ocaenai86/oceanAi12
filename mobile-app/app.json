@@ -19,12 +19,15 @@ export default function App() {
           tabBarStyle: { backgroundColor: "#050814", borderTopColor: "#23262E" },
           tabBarActiveTintColor: "#3ED9C7",
           tabBarInactiveTintColor: "#8A8F9C",
+
           tabBarIcon: ({ color, size }) => {
             let iconName = "ellipse";
+
             if (route.name === "Public") iconName = "planet";
             if (route.name === "Personal") iconName = "person-circle";
             if (route.name === "Dashboard") iconName = "speedometer";
             if (route.name === "Settings") iconName = "settings";
+
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}

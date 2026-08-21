@@ -13,38 +13,56 @@ const API_BASE = "https://your-backend-domain.com/api";
 export default function PersonalProjectsScreen() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  // گرفتن پروژه‌ها از API
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch(`${API_BASE}/oceanai/projects`);
-        const data = await res.json();
-        setProjects(data.projects || []);
-      } catch {
-        setProjects([]);
-      } finally {
-        setLoading(false);
+  /* ------------------------------
+     دریافت پروژه‌ها از API OceanAI
+  ------------------------------ */
+  const fetchProjects = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/oceanai/projects`);
+      const data = await res.json();
+
+      if (data?.success === false) {
+        setError(data.error || "خطا در دریافت پروژه‌ها");
+      } else {
+        setProjects(data.data || []);
       }
-    };
+    } catch (err) {
+      setError("خطا در اتصال به OceanAI");
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchProjects();
   }, []);
 
-  // حذف پروژه
+  /* ------------------------------
+     حذف پروژه از API OceanAI
+  ------------------------------ */
   const deleteProject = async (id) => {
     try {
-      await fetch(`${API_BASE}/oceanai/projects/${id}`, {
+      const res = await fetch(`${API_BASE}/oceanai/projects/${id}`, {
         method: "DELETE",
       });
 
-      setProjects((prev) => prev.filter((p) => p.id !== id));
+      const data = await res.json();
+
+      if (data?.success) {
+        setProjects((prev) => prev.filter((p) => p.id !== id));
+      } else {
+        alert(data.error || "خطا در حذف پروژه");
+      }
     } catch {
       alert("خطا در حذف پروژه");
     }
   };
 
-  // افزودن پروژه جدید
+  /* ------------------------------
+     افزودن پروژه جدید
+  ------------------------------ */
   const addProject = async () => {
     const newProject = {
       title: "پروژه جدید OceanAI",
@@ -64,7 +82,12 @@ export default function PersonalProjectsScreen() {
       });
 
       const data = await res.json();
-      setProjects((prev) => [...prev, data.project]);
+
+      if (data?.success) {
+        setProjects((prev) => [...prev, data.project]);
+      } else {
+        alert(data.error || "خطا در افزودن پروژه");
+      }
     } catch {
       alert("خطا در افزودن پروژه");
     }
@@ -82,8 +105,11 @@ export default function PersonalProjectsScreen() {
         <Text style={styles.addButtonText}>افزودن پروژه جدید</Text>
       </TouchableOpacity>
 
+      {/* وضعیت لودینگ / خطا / لیست پروژه‌ها */}
       {loading ? (
         <ActivityIndicator color="#3ED9C7" style={{ marginTop: 20 }} />
+      ) : error ? (
+        <Text style={styles.empty}>{error}</Text>
       ) : projects.length === 0 ? (
         <Text style={styles.empty}>هنوز هیچ پروژه‌ای ثبت نشده است.</Text>
       ) : (

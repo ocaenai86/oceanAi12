@@ -1,0 +1,48 @@
+# ================================
+# OceanAI CODEOWNERS (Full Version)
+# ================================
+# این فایل تعیین می‌کند چه کسی مسئول بررسی تغییرات هر بخش پروژه است.
+# GitHub به‌صورت خودکار این افراد را برای Review فراخوانی می‌کند.
+
+# -------------------------------
+# مالک اصلی کل پروژه
+# -------------------------------
+*       @mojib
+
+# -------------------------------
+# Backend – API, Controllers, Models
+# -------------------------------
+backend/        @mojib @oceanai-backend-team
+
+# -------------------------------
+# Frontend – Web App, UI, Components
+# -------------------------------
+frontend/       @mojib @oceanai-frontend-team
+
+# -------------------------------
+# Mobile App – React Native / Expo
+# -------------------------------
+mobile-app/     @mojib @oceanai-mobile-team
+
+# -------------------------------
+# CI/CD – GitHub Actions, Pipelines
+# -------------------------------
+.github/        @mojib @oceanai-devops
+
+# -------------------------------
+# Documentation – Guides, API Docs
+# -------------------------------
+docs/           @mojib @oceanai-docs
+
+# -------------------------------
+# Config Files – Env, JSON, YAML
+# -------------------------------
+*.json          @mojib
+*.yml           @mojib
+*.yaml          @mojib
+*.env           @mojib
+
+# -------------------------------
+# Scripts – Bash, Node Tools
+# -------------------------------
+scripts/        @mojib @oceanai-devops

@@ -1,0 +1,49 @@
+{
+  "name": "OceanAI DevContainer",
+  "dockerFile": "Dockerfile",
+
+  "runArgs": [
+    "--privileged",
+    "--init"
+  ],
+
+  "postCreateCommand": "npm install -g pnpm && pnpm install --recursive",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true
+      },
+      "extensions": [
+        "eamodio.gitlens",
+        "EditorConfig.EditorConfig",
+        "github.vscode-github-actions",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-azuretools.vscode-docker",
+        "GitHub.copilot"
+      ]
+    }
+  },
+
+  "containerEnv": {
+    "GIT_EDITOR": "nano",
+    "NODE_ENV": "development"
+  },
+
+  "mounts": [
+    "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/node/.ssh,readonly",
+    "type=volume,target=/var/lib/docker"
+  ],
+
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "remoteUser": "node"
+}

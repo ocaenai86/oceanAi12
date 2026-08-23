@@ -1,0 +1,37 @@
+name: OceanAI EditorConfig Checker
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  editorconfig-check:
+    name: Validate EditorConfig Rules
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js (OceanAI Standard)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install editorconfig-checker
+        run: |
+          npm install -g editorconfig-checker
+
+      - name: Run EditorConfig Checker on Backend
+        run: editorconfig-checker backend/
+
+      - name: Run EditorConfig Checker on Frontend
+        run: editorconfig-checker frontend/
+
+      - name: Run EditorConfig Checker on Mobile App
+        run: editorconfig-checker mobile-app/
+
+      - name: Run EditorConfig Checker on Root Files
+        run: editorconfig-checker .

@@ -1,8 +1,5 @@
 version: 2
 updates:
-  # ============================
-  # Backend (Node.js API)
-  # ============================
   - package-ecosystem: npm
     directory: "/backend"
     schedule:
@@ -18,9 +15,6 @@ updates:
       backend-development:
         dependency-type: "development"
 
-  # ============================
-  # Frontend (React / Next.js)
-  # ============================
   - package-ecosystem: npm
     directory: "/frontend"
     schedule:
@@ -36,9 +30,6 @@ updates:
       frontend-development:
         dependency-type: "development"
 
-  # ============================
-  # Mobile App (React Native / Expo)
-  # ============================
   - package-ecosystem: npm
     directory: "/mobile-app"
     schedule:
@@ -54,9 +45,6 @@ updates:
       mobile-development:
         dependency-type: "development"
 
-  # ============================
-  # GitHub Actions
-  # ============================
   - package-ecosystem: github-actions
     directory: "/"
     schedule:

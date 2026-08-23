@@ -1,59 +1,42 @@
-version: 2
-updates:
-  - package-ecosystem: npm
-    directory: "/backend"
-    schedule:
-      interval: weekly
-      day: saturday
-      time: "10:00"
-    open-pull-requests-limit: 10
-    target-branch: development
-    versioning-strategy: increase
-    groups:
-      backend-production:
-        dependency-type: "production"
-      backend-development:
-        dependency-type: "development"
+name: OceanAI Security Pipeline
 
-  - package-ecosystem: npm
-    directory: "/frontend"
-    schedule:
-      interval: weekly
-      day: saturday
-      time: "10:00"
-    open-pull-requests-limit: 10
-    target-branch: development
-    versioning-strategy: increase
-    groups:
-      frontend-production:
-        dependency-type: "production"
-      frontend-development:
-        dependency-type: "development"
+on:
+  push:
+  pull_request:
 
-  - package-ecosystem: npm
-    directory: "/mobile-app"
-    schedule:
-      interval: weekly
-      day: saturday
-      time: "10:00"
-    open-pull-requests-limit: 10
-    target-branch: development
-    versioning-strategy: increase
-    groups:
-      mobile-production:
-        dependency-type: "production"
-      mobile-development:
-        dependency-type: "development"
+jobs:
+  security:
+    name: Security & Vulnerability Scan
+    runs-on: ubuntu-latest
 
-  - package-ecosystem: github-actions
-    directory: "/"
-    schedule:
-      interval: weekly
-      day: saturday
-      time: "10:00"
-    open-pull-requests-limit: 10
-    target-branch: development
-    groups:
-      github-actions:
-        patterns:
-          - "*"
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Backend – npm audit
+        run: |
+          cd backend
+          npm install
+          npm audit --audit-level=moderate
+
+      - name: Frontend – npm audit
+        run: |
+          cd frontend
+          npm install
+          npm audit --audit-level=moderate
+
+      - name: Mobile – npm audit
+        run: |
+          cd mobile-app
+          npm install
+          npm audit --audit-level=moderate
+
+      - name: Secret Scan (GitLeaks)
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          args: detect --source . --no-git

@@ -7,42 +7,42 @@
 # -------------------------------
 # مالک اصلی کل پروژه
 # -------------------------------
-*       @mojib
+*       @ocaenai86
 
 # -------------------------------
 # Backend – API, Controllers, Models
 # -------------------------------
-backend/        @mojib @oceanai-backend-team
+backend/        @ocaenai86 @oceanai-backend-team
 
 # -------------------------------
 # Frontend – Web App, UI, Components
 # -------------------------------
-frontend/       @mojib @oceanai-frontend-team
+frontend/       @ocaenai86 @oceanai-frontend-team
 
 # -------------------------------
 # Mobile App – React Native / Expo
 # -------------------------------
-mobile-app/     @mojib @oceanai-mobile-team
+mobile-app/     @ocaenai86 @oceanai-mobile-team
 
 # -------------------------------
 # CI/CD – GitHub Actions, Pipelines
 # -------------------------------
-.github/        @mojib @oceanai-devops
+.github/        @ocaenai86 @oceanai-devops
 
 # -------------------------------
 # Documentation – Guides, API Docs
 # -------------------------------
-docs/           @mojib @oceanai-docs
+docs/           @ocaenai86 @oceanai-docs
 
 # -------------------------------
 # Config Files – Env, JSON, YAML
 # -------------------------------
-*.json          @mojib
-*.yml           @mojib
-*.yaml          @mojib
-*.env           @mojib
+*.json          @ocaenai86
+*.yml           @ocaenai86
+*.yaml          @ocaenai86
+*.env           @ocaenai86
 
 # -------------------------------
 # Scripts – Bash, Node Tools
 # -------------------------------
-scripts/        @mojib @oceanai-devops
+scripts/        @ocaenai86 @oceanai-devops

@@ -1,0 +1,39 @@
+name: OceanAI Kubernetes Deploy Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-k8s:
+    name: Deploy OceanAI to Kubernetes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: v1.30.0
+
+      - name: Configure Kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+
+      - name: Apply Backend Deployment
+        run: |
+          kubectl apply -f k8s/backend-deployment.yml
+          kubectl apply -f k8s/backend-service.yml
+
+      - name: Apply Frontend Deployment
+        run: |
+          kubectl apply -f k8s/frontend-deployment.yml
+          kubectl apply -f k8s/frontend-service.yml
+
+      - name: Apply Ingress
+        run: |
+          kubectl apply -f k8s/ingress.yml

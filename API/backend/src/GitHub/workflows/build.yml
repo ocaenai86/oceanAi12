@@ -1,12 +1,12 @@
-name: OceanAI Build Pipeline
+name: OceanAI Lint Pipeline
 
 on:
   push:
   pull_request:
 
 jobs:
-  build:
-    name: Build All OceanAI Modules
+  lint:
+    name: Run ESLint on All OceanAI Modules
     runs-on: ubuntu-latest
 
     steps:
@@ -18,20 +18,32 @@ jobs:
         with:
           node-version: 18
 
-      - name: Build Backend
+      - name: Install dependencies (Backend)
         run: |
           cd backend
           npm install
-          npm run build
 
-      - name: Build Frontend
+      - name: Run ESLint (Backend)
+        run: |
+          cd backend
+          npm run lint
+
+      - name: Install dependencies (Frontend)
         run: |
           cd frontend
           npm install
-          npm run build
 
-      - name: Build Mobile App
+      - name: Run ESLint (Frontend)
+        run: |
+          cd frontend
+          npm run lint
+
+      - name: Install dependencies (Mobile App)
         run: |
           cd mobile-app
           npm install
-          npm run build
+
+      - name: Run ESLint (Mobile App)
+        run: |
+          cd mobile-app
+          npm run lint

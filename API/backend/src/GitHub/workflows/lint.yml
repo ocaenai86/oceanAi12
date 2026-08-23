@@ -1,0 +1,49 @@
+name: OceanAI Lint Pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    name: Run ESLint on All OceanAI Modules
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies (Backend)
+        run: |
+          cd backend
+          npm install
+
+      - name: Run ESLint (Backend)
+        run: |
+          cd backend
+          npm run lint
+
+      - name: Install dependencies (Frontend)
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run ESLint (Frontend)
+        run: |
+          cd frontend
+          npm run lint
+
+      - name: Install dependencies (Mobile App)
+        run: |
+          cd mobile-app
+          npm install
+
+      - name: Run ESLint (Mobile App)
+        run: |
+          cd mobile-app
+          npm run lint

@@ -1,1 +1,19 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oceanai-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: oceanai-backend
+  template:
+    metadata:
+      labels:
+        app: oceanai-backend
+    spec:
+      containers:
+        - name: backend
+          image: oceanai-backend:latest
+          ports:
+            - containerPort: 3000

@@ -37,3 +37,41 @@ jobs:
       - name: Apply Ingress
         run: |
           kubectl apply -f k8s/ingress.yml
+
+
+          name: OceanAI Kubernetes Deploy Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-k8s:
+    name: Deploy OceanAI to Kubernetes
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/setup-kubectl@v4
+        with:
+          version: v1.30.0
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+
+      - name: Apply backend manifests
+        run: |
+          kubectl apply -f k8s/backend-deployment.yml
+          kubectl apply -f k8s/backend-service.yml
+
+      - name: Apply frontend manifests
+        run: |
+          kubectl apply -f k8s/frontend-deployment.yml
+          kubectl apply -f k8s/frontend-service.yml
+
+      - name: Apply ingress
+        run: kubectl apply -f k8s/ingress.yml

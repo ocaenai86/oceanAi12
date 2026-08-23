@@ -1,0 +1,49 @@
+name: OceanAI Monitoring & Alerts
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # هر ۱۰ دقیقه
+  workflow_dispatch:
+
+jobs:
+  check-api:
+    name: Check Backend API Health
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Backend Health Endpoint
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.oceanai.site/health || echo "000")
+          echo "Status: $STATUS"
+          if [ "$STATUS" -ne "200" ]; then
+            echo "Backend is DOWN"
+            exit 1
+          fi
+
+      - name: Notify (Discord / Telegram)
+        if: failure()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "⚠️ OceanAI Backend is DOWN!"}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
+  check-frontend:
+    name: Check Frontend Health
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Frontend
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://oceanai.site || echo "000")
+          echo "Status: $STATUS"
+          if [ "$STATUS" -ne "200" ]; then
+            echo "Frontend is DOWN"
+            exit 1
+          fi
+
+      - name: Notify (Discord / Telegram)
+        if: failure()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "⚠️ OceanAI Frontend is DOWN!"}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
